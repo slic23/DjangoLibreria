@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 # Create your views here.
 from .models import Book, Author, BookInstance, Genre
+
 def index(request):
     """View function for home page of site."""
 
