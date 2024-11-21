@@ -1,5 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.http import JsonResponse
+
 # Create your views here.
 from .models import Book, Author, BookInstance, Genre
 
@@ -25,3 +27,27 @@ def index(request):
 
     # Render the HTML template index.html with the data in the context variable
     return render(request, 'index.html', context=context)
+def ListarLibros(request):
+    numLibros =  Book.objects.all()
+    context = {
+	'numlibros':numLibros
+    }
+    return render(request,'index.html' , context= context)
+
+def VistaDetalle(request,pk):
+    Libro = Book.objects.filter(pk=pk)[0]
+    context = { 'Libro':Libro}
+    return HttpResponse(Libro.author)
+def index2(request,numero1):
+    if  numero1!=0:
+    	Libro = Book.objects.filter(pk=numero1)[0]
+    
+    	json = {'titulo': Libro.title, 'lenguaje':Libro.lenguaje ,
+    	'sinopsis':Libro.summary, 'isbn':Libro.isbn  }	 
+    	return JsonResponse(json)
+    else:
+	json= {}
+	Libros = Book.objects.all()
+	for libro in Libros:
+	     
+		

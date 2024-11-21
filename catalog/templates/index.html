@@ -1,10 +1,10 @@
-{% extends "ase_generic.html" %}
+{% extends "base_generic.html" %}
 
 {% block content %}
   <h1>Local Library Home</h1>
   <p>
-    Welcome to LocalLibrary, a website developed by
-    <em>Mozilla Developer Network</em>!
+    Welcome to LocalLibrary, a website developed 
+    <em>By senior programmer Issam Ramdani</em>
   </p>
   <h2>Dynamic content</h2>
   <p>The library has the following record counts:</p>
@@ -13,5 +13,24 @@
     <li><strong>Copies:</strong> {{ num_instances }}</li>
     <li><strong>Copies available:</strong> {{ num_instances_available }}</li>
     <li><strong>Authors:</strong> {{ num_authors }}</li>
+
   </ul>
+
+  {% if  numlibros%}
+  <ul>
+
+    {% for book in numlibros %}
+    <li>
+      <a href="{{ book.get_absolute_url }} ">{{ book.title }}</a>
+
+      
+
+    </li>
+    {% endfor %}
+
+  </ul>
+  {% else %}
+    <p>No hay libros en la biblioteca.</p>
+  {% endif %}
+
 {% endblock %}
