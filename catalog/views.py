@@ -57,5 +57,3 @@ def index2(request, numero1):
         for libro in libros:
             dicfinal['titulo'] = libro.title  # Asegúrate de esto
         return JsonResponse(dicfinal)
-def ListarLibros(request):
-    return JsonResponse(json)
