@@ -39,15 +39,19 @@ def VistaDetalle(request,pk):
     context = { 'Libro':Libro}
     return HttpResponse(Libro.author)
 def index2(request,numero1):
-    if  numero1!=0:
-    	Libro = Book.objects.filter(pk=numero1)[0]
-    
-    	json = {'titulo': Libro.title, 'lenguaje':Libro.lenguaje ,
-    	'sinopsis':Libro.summary, 'isbn':Libro.isbn  }	 
-    	return JsonResponse(json)
+    if numero1 == 0:
+   	 Libro = Book.objects.filter(pk=numero1)[0]
+    	 autor = Author.objects.get(pk=Libro.author.pk)
+    	 dictautor = { 'nombreAutor': autor.first_name }
+         json = {'titulo': Libro.title, 'lenguaje':Libro.lenguaje,
+    	        'sinopsis':Libro.summary,'isbn':Libro.isbn,'autor':dictautor}
+         return JsonResponse(json)
     else:
-	json= {}
-	Libros = Book.objects.all()
-	for libro in Libros:
-	     
-		
+       libros=Book.objects.all()
+       dicfinal = {}
+       for libro in libros:
+          docfinal['titulo']=libro.title
+       return JsonResponse(dicfinal)
+
+def ListarLibros(request):
+    return JsonResponse(json)
