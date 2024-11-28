@@ -53,7 +53,6 @@ def index2(request, numero1):
         return JsonResponse(datos)
     else:
         libros = Book.objects.all()
-<<<<<<< HEAD
         paquete = []
         for libro in libros:
             #autor = Author.objects.filter(pk=libro.author.pk)[0]
@@ -65,10 +64,9 @@ def index2(request, numero1):
             'isbn': libro.isbn,
             #'autor': dictautor
         }
-            
+
             paquete.append(datos2)
         return JsonResponse(paquete )
-=======
         dicfinal = {} 
         for libro in libros:
             dicfinal['titulo'] = libro.title 
@@ -81,4 +79,4 @@ class BookListView(generic.ListView):
     template_name = 'books/my_arbitrary_template_name_list.html'  # Specify your own template name/location
 
 
->>>>>>> 214bf39a65985c0f5b98978fcfaf7e21aec3363a
+
