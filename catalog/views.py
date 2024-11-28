@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.http import JsonResponse
-
+from django.views  import generic
 # Create your views here.
 from .models import Book, Author, BookInstance, Genre
 
@@ -53,6 +53,7 @@ def index2(request, numero1):
         return JsonResponse(datos)
     else:
         libros = Book.objects.all()
+<<<<<<< HEAD
         paquete = []
         for libro in libros:
             #autor = Author.objects.filter(pk=libro.author.pk)[0]
@@ -67,3 +68,17 @@ def index2(request, numero1):
             
             paquete.append(datos2)
         return JsonResponse(paquete )
+=======
+        dicfinal = {} 
+        for libro in libros:
+            dicfinal['titulo'] = libro.title 
+        return JsonResponse(dicfinal)
+
+class BookListView(generic.ListView):
+    model = Book
+    context_object_name = 'book_list'   # your own name for the list as a template variable
+    queryset = Book.objects.filter(title__icontains='war')[:5] # Get 5 books containing the title war
+    template_name = 'books/my_arbitrary_template_name_list.html'  # Specify your own template name/location
+
+
+>>>>>>> 214bf39a65985c0f5b98978fcfaf7e21aec3363a
