@@ -62,9 +62,9 @@ def index2(request, numero1):
                  'autores':dictautor
              }
              
-
+	
              paquete.append(datos2)
-         return JsonResponse(paquete , safe=False)
+         return JsonResponse({'paquete':paquete})
          
 	     
 
