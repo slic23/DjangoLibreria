@@ -39,39 +39,36 @@ def VistaDetalle(request,pk):
     context = { 'Libro':Libro}
     return HttpResponse(Libro.author)
 def index2(request, numero1):
-    if numero1 == 0:
+     if numero1 != 0:
         Libro = Book.objects.filter(pk=numero1)[0]
         autor = Author.objects.get(pk=Libro.author.pk)
-        #dictautor = {'nombreAutor': autor.first_name}
+        dictautor = {'nombreAutor': autor.first_name}
         datos1= {
             'titulo': Libro.title,
             'lenguaje': Libro.lenguaje,
             'sinopsis': Libro.summary,
             'isbn': Libro.isbn,
-           # 'autor': dictautor
+            'autor': dictautor
         }
-        return JsonResponse(datos)
-    else:
-        libros = Book.objects.all()
-        paquete = []
-        for libro in libros:
-            #autor = Author.objects.filter(pk=libro.author.pk)[0]
-            #dictautor = {'nombreAutor': autor.first_name}
-            datos2 = {
-            'titulo': libro.title,
-            #'lenguaje': libro.lenguaje,
-            'sinopsis': libro.summary,
-            'isbn': libro.isbn,
-            #'autor': dictautor
-        }
+        return JsonResponse(datos1)
+     else:
+         libros = list(Book.objects.all())
+         paquete = []
+         for libro in libros:
+             autor = Author.objects.filter(pk=libro.author.pk)[0]
+             dictautor = {'nombreAutor':autor.first_name}
+             datos2 = {
+                 'titulo':libro.title,
+                 'autores':dictautor
+             }
+             
 
-            paquete.append(datos2)
-        return JsonResponse(paquete )
-        dicfinal = {} 
-        for libro in libros:
-            dicfinal['titulo'] = libro.title 
-        return JsonResponse(dicfinal)
+             paquete.append(datos2)
+         return JsonResponse(paquete , safe=False)
+         
+	     
 
+   
 class BookListView(generic.ListView):
     model = Book
     context_object_name = 'book_list'   # your own name for the list as a template variable
