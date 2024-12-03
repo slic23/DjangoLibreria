@@ -1,0 +1,17 @@
+"""
+
+
+1º Escriba una consulta utilizando Django ORM para recuperar todos los objetos de libros de su base de datos.
+librosX = BooksX.objects.all()
+2º Escriba una consulta utilizando Django ORM para obtener el título y la fecha de publicación de todos los libros de la base de datos.
+librosX = BooksX.objects.all().values('title','published_date')
+3º Obtenga el nombre y apellido de todos los autores nuevos (los autores con puntuación_popularidad = 0 son autores nuevos).
+AuthorX.objects.all().filter(popularity_score__gt = 0 )
+4º Obtenga el nombre y la puntuación de popularidad de todos los autores cuyo nombre comience con A y su puntuación de popularidad sea mayor o igual a 8.
+AuthorX.objects.all().filter(firstname__startswith='A',popularity_score__gt=7) -> el startswith no es case sensitive
+5º Obtenga el nombre de todos los autores que no distingan entre mayúsculas y minúsculas en su nombre.
+AuthorX.objects.all().filter(firstname__icontains ="") -> 
+6º Obtener la lista de todos los autores cuyos identificadores están en la lista = [1, 3, 23, 43, 134, 25].
+
+#libros = AuthorX.objects.filter(pk__in=[1, 3, 23, 43, 134, 25])
+"""

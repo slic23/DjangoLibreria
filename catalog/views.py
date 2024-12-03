@@ -72,8 +72,13 @@ def index2(request, numero1):
 class BookListView(generic.ListView):
     model = Book
     context_object_name = 'book_list'   # your own name for the list as a template variable
-    queryset = Book.objects.filter(title__icontains='war')[:5] # Get 5 books containing the title war
-    template_name = 'books/my_arbitrary_template_name_list.html'  # Specify your own template name/location
+    queryset = Book.objects.all() # Get 5 books containing the title war
+    template_name = 'book_list.html'  # Specify your own template name/location
 
 
-
+def devolver(request):
+    valor1 =  request.GET["valor"]
+    valor2 = request.GET["valor2"]
+    print(request.GET)
+    return HttpResponse(f'{valor1},{valor2}')
+  
