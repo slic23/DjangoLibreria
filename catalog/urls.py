@@ -8,5 +8,5 @@ urlpatterns = [
     path('libritos/<int:pk>', views.VistaDetalle, name='book-detail'),
     path('<int:numero1>/',views.index2,name='index2'),
     path('libros/',views.BookListView.as_view(),name="books"),
-    path('libros/',views.devolver,name='devolver')
+    path('mostrar/',views.devolver,name='devolver')
 ]

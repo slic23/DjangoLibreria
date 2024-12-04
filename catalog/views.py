@@ -79,6 +79,6 @@ class BookListView(generic.ListView):
 def devolver(request):
     valor1 =  request.GET["valor"]
     valor2 = request.GET["valor2"]
-    print(request.GET)
-    return HttpResponse(f'{valor1},{valor2}')
+    mensaje = f'Este es el mensaje {valor1} y valor dos es {valor2}'
+    return HttpResponse(mensaje)
   
