@@ -15,3 +15,62 @@ AuthorX.objects.all().filter(firstname__icontains ="") ->
 
 #libros = AuthorX.objects.filter(pk__in=[1, 3, 23, 43, 134, 25])
 """
+7º Obtenga la lista de todos los editores que se unieron después o en septiembre de 2012; la lista de salida solo debe contener el nombre y la fecha de ingreso del editor. Ordene por fecha de incorporación.
+ PublisherX.objects.filter( joindate__gte = datetime.date(2012,9,1) ).values('firstname','joindate').order_by('joindate')
+8º Obtenga una lista ordenada de los primeros 10 apellidos de los editores; la lista no debe contener duplicados.
+ PublisherX.objects.values('lastname').distinct().order_by('lastname')[:10] => usar despues del values para que tenga efecto el distinct
+9º Obtenga la fecha de registro del último autor y editor que se unió.
+ primero saco la ultima fecha del autor => fecha_uniqa = AuthorX.objects.aggregate(Max('joindate'))['joindate__max'] 
+ luego saco el ultimo autor con esa fecha => fecha_uniqa = AuthorX.objects.aggregate(Max('joindate'))['joindate__max']
+ ahora hago lo mismo con el editor => fecha_uniqa = AuthorX.objects.aggregate(Max('joindate'))['joindate__max']
+ ahora teniendo el dato de la fecha lo igualo y saco el ultimo publicador 
+ segunda = AuthorX.objects.filter(joindate = fecha_uniqa)
+segunda = AuthorX.objects.filter(joindate = fecha_uniqa).values('joindate')
+esta = PublisherX.objects.filter(joindate = publicacion_ultimo).values('joindate')
+ segunda.union(esta)
+
+10º Obtenga el nombre, apellido y fecha de ingreso del último autor que se unió.
+fecha_uniqa = AuthorX.objects.aggregate(Max('joindate'))['joindate__max']
+AuthorX.objects.filter(joindate = fecha_uniqa).values('firstname','lastname','joindate')
+
+11º Obtener la lista de todos los autores que se unieron después o en el año 2013
+ AuthorX.objects.filter(joindate__gte = datetime.date(2013,1,1))
+12º Obtenga el precio total de todos los libros escritos por autores con una puntuación de popularidad de 7 o superior.
+autores_escor = list(AuthorX.objects.filter( popularity_score__gte = 7).values_list('pk',flat=True))
+    """
+
+lista = []
+    for i in autores_escor:
+        
+        lista.append(i['pk'])
+        
+    print(lista)
+    """
+    
+
+    libros = BooksX.objects.filter(author__in = autores_escor ).aggregate(total = Sum('price'))['total']
+
+
+13º Obtenga una lista de títulos de todos los libros escritos por autores cuyo nombre comience 
+con 'A'. El resultado debe contener una lista de los títulos de cada libro. No es una lista de tuplas.
+saco los autores => autores = AuthorX.objects.filter(firstname__startswith='A').values_list('pk',flat=True)
+
+despues saco los libros => libros = list(BooksX.objects.filter(author__in = autores).values_list('title',flat=True))
+
+14º Obtenga el precio total de todos los libros escritos por autor con pk en la lista [1, 3, 4]
+ lista = [1,3,4]
+ BooksX.objects.filter(author__in = lista).aggregate(total = Sum('price'))['total']
+15º Produzca una lista de todos los autores junto con su recomendador
+    AuthorX.objects.all().values('firstname','recommendedby__firstname')
+
+
+
+
+***** 
+ __lte -> Less than or equal
+ __gte -> Greater than or equal
+ __lt -> Less than
+ __gt -> Greater than
+
+
+******

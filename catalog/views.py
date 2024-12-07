@@ -2,6 +2,8 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.http import JsonResponse
 from django.views  import generic
+from catalog.models import *
+from django.db.models import Sum
 # Create your views here.
 from .models import Book, Author, BookInstance, Genre
 
@@ -82,3 +84,20 @@ def devolver(request):
     mensaje = f'Este es el mensaje {valor1} y valor dos es {valor2}'
     return HttpResponse(mensaje)
   
+def consultas(request):
+    autores_escor = list(AuthorX.objects.filter( popularity_score__gte = 7).values_list('pk',flat=True))
+    """
+
+lista = []
+    for i in autores_escor:
+        
+        lista.append(i['pk'])
+        
+    print(lista)
+    """
+    
+
+    libros = BooksX.objects.filter(author__in = autores_escor ).aggregate(total = Sum('price'))['total']
+
+    
+    return HttpResponse(libros)
