@@ -139,7 +139,7 @@ class BooksX(models.Model):
 	price = models.IntegerField(null=True)
 	published_date = models.DateField()
 	author = models.ForeignKey('AuthorX', on_delete=models.CASCADE, related_name='books', related_query_name='books')
-	publisher = models.ForeignKey('PublisherX', on_delete=models.CASCADE, related_name='books', related_query_name='books')
+	publisher = models.ForeignKey('PublisherX', on_delete=models.CASCADE, related_name='books2', related_query_name='books')
 	def __str__(self):
             return self.title
      
@@ -148,6 +148,5 @@ class UserX(models.Model):
     email = models.CharField(max_length=100)
     def __str__(self):
 	    return  self.username
-
-# escriba una consulta , el  titulo , fecha de publicacion , 
+ 
 

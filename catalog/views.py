@@ -98,6 +98,6 @@ lista = []
     
 
     libros = BooksX.objects.filter(author__in = autores_escor ).aggregate(total = Sum('price'))['total']
-
+    AuthorX.objects.filter(Q(firstname__startswith='a')& Q(Q(popularity_score__gte = 5) | Q(joindate__gte = datetime.date(2014,1,1))))
     
     return HttpResponse(libros)

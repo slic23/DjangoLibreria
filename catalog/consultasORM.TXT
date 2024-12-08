@@ -65,8 +65,168 @@ despues saco los libros => libros = list(BooksX.objects.filter(author__in = auto
 
 
 
+16º Produzca una lista de todos los autores que publicaron su libro por editorial pk = 1, la lista de salida debe ordenarse por nombre.
 
+    recuerda importante related_name => list(AuthorX.objects.filter(books__publisher__pk=1).values_list('firstname',flat=True))
+
+17º Crea tres nuevos usuarios y agrega los seguidores del autor con pk = 1.
+> usuario1 = UserX(Username = "ramdani",email="ramdani@gmail.com")
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+  File "/home/issam/.virtualenvs/proyecto1/lib/python3.8/site-packages/django/db/models/base.py", line 567, in __init__
+    raise TypeError(
+TypeError: UserX() got unexpected keyword arguments: 'Username'
+>>> usuario1 = UserX(username = "ramdani",email="ramdani@gmail.com")
+>>> usuario1.save()
+>>> UserX.objects.all()
+<QuerySet [<UserX: issam>, <UserX: ramdani>]>
+>>> usuario1 = UserX(username = "rania",email="rania@gmail.com")
+>>> usuario1 = UserX(username = "khadija",email="khadijaa@gmail.com")
+>>> usuario1.save()
+>>> usuario1 = UserX(username = "rania",email="rania@gmail.com")
+>>> usuario1.save()
+>>> UserX.objects.all()
+<QuerySet [<UserX: issam>, <UserX: ramdani>, <UserX: khadija>, <UserX: rania>]>
+>>> AuthorX.objects.all()[0]
+<AuthorX: fiodor dostoviesky>
+>>> autor_uno = AuthorX.objects.all()[0]
+>>> autor_uno.followers.add(Userx.objects.all()[0])
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+NameError: name 'Userx' is not defined
+>>> autor_uno.followers.add(UserX.objects.all()[0])
+>>> autor_uno.followers.add(UserX.objects.all()[1])
+>>>
+
+
+18º => Establece la lista de seguidores del autor con pk = 2, con un solo usuario.
+autor2 = AuthorX.objects.filter(pk=2)[0]
+.set[]=> borra todo
+autor2.followers.set([usuario0])
+
+19º => Agregar nuevos usuarios en seguidores del autor con pk = 1.
+
+ autor1 = AuthorX.objects.filter(pk = 1)[0]
+ UserX.objects.create(username= "alibaba",email = "fantasma@gmail.com")
+ autor1.followers.add(objetos[5])
+
+
+20º Elimina un usuario de los seguidores del autor con pk = 1.
+  autor1.followers.remove(objetos[2])
 ***** 
+
+
+21 º Obtenga los nombres de todos los autores cuyo usuario con pk = 1 está siguiendo. (Sin acceder al administrador de objetos Author.objects)
+ asi =>  issam = UserX.objects.filter(pk=1)[0]
+     issam.followed_authors.all()
+<QuerySet [<AuthorX: fiodor dostoviesky>, <AuthorX: Allan Poe>, <AuthorX: Louis-Ferdinand Celine>]>
+
+
+22º Obtenga una lista de todos los autores que escribieron un libro con "título" como parte del título del libro.
+
+BooksX.objects.filter(title__icontains = 'TITULO').values_list('author__firstname')
+
+23º Obtenga la lista de autores cuyos nombres comienzan con 'A' sin distinguir entre mayúsculas y minúsculas 
+y su puntuación de popularidad es superior a 5 o se han unido después de 2014 con objetos Q.
+
+
+AuthorX.objects.filter(Q(firstname__startswith='a')& Q(Q(popularity_score__gte = 5) | Q(joindate__gte = datetime.date(2014,1,1))))
+
+24º  Recupere un objeto específico con clave principal = 1 de la tabla Autor
+ AuthorX.objects.filter(pk=1)[0] preferible usar .get(pk = 1)
+
+25º Recupere los primeros N=10 registros de una tabla de Autor.
+ AuthorX.objects.all()[:10]
+
+
+26º Recupere registros de una tabla que coincidan con esta condición, 
+puntuación de popularidad = 7. Y obtenga el primer y último registro de esa lista.
+
+autores = list(AuthorX.objects.filter(popularity_score=7))
+primer_autor = autores[0] if autores else None
+ultimo_autor = autores[-1] if autores else None
+
+lista = [primer_autor, ultimo_autor]
+
+
+
+27º Recupere todos los autores que se unieron después o en el año 2012, puntaje de popularidad mayor 
+o igual a 4, fecha de ingreso posterior o con fecha 12, 
+y el nombre comienza con 'a' (no distingue entre mayúsculas y minúsculas) sin utilizar objetos Q.
+
+AuthorX.objects.filter(joindate__gte = 2012 , popularity_score__gte = 4 , firstname__startswith = 'a')
+
+
+
+28º Recuperar todos los autores que no se unieron en 2012.
+  estaba cerca => AuthorX.objects.exclude(joindate__year=2012)
+
+29º Recuperar el autor más antiguo, el autor más nuevo,
+ la puntuación de popularidad promedio de los autores,
+ la suma del precio de todos los libros en la base de datos.
+
+ lo del autor mas antiguo se puede hacer de dos formas , con order by y con aggregate 
+
+  autor_viejo = AuthorX.objects.order_by('joindate').values('firstname').first()
+  autor_nuevo = AuthorX.objects.order_by('-joindate).values('firstname').first()
+  autoresPromedio = AuthorX.objects.aggregate(promedio = Avg('popularity_score'))['promedio']
+  sumatotal = BooksX.objects.aggregate(precioLibros = Sum('price'))['precioLibros']
+
+
+30º Recupera todos los autores que no tienen recomendador, recomendado por campo es nulo.
+  ==>  AuthorX.objects.filter(recommendedby__isnull =True)
+
+
+31º Recuperar los libros que no tienen ningún autor, donde el autor es nulo. Además,
+ recupere los libros cuyos autores están presentes, pero no tienen recomendador,
+  donde el autor no es nulo y el recomendador del autor es nulo. (Tenga en cuenta que si
+   no se especifica la condición para que el autor no sea nulo y solo se menciona la condición para que el recomendador sea nulo,
+ se recuperarán todos los libros que tengan tanto el autor nulo como el recomendador del autor nulo).
+
+  BooksX.objects.filter(Q(author__isnull = True) |  Q(author__recommendedby__isnull = True) )
+
+
+32º Precio total de los libros escritos por autor con clave principal = 1. (Agregación sobre modelo relacionado), 
+libro más antiguo escrito por autor con pk = 1, último libro escrito por autor con pk = 1.
+
+
+libro = BooksX.objects.filter(author__pk = 1).values('title').order_by('published_date').first()
+libro2 = BooksX.objects.filter(author__pk = 1).values('title').order_by('-published_date').first()
+BooksX.objects.filter( Q( author__pk = 1)).aggregate(total = Sum('price'))['total']
+
+
+33º Entre las editoriales de la tabla de editoriales, ¿cuál es el libro más antiguo que ha publicado alguna editorial?
+ >> BooksX.objects.order_by('published_date').values('publisher__firstname','title').first()
+ mejor consulta =>  BooksX.objects.filter(publisher__isnull=False).order_by('published_date').first()
+
+ 34º Precio medio de todos los libros de la base de datos.
+
+ BooksX.objects.filter(price__isnull = False).aggregate(medio = Avg('price'))['medio']
+
+ 35º Puntuación máxima de popularidad del editor entre todos los editores que publicaron un libro para
+  el autor con pk = 1. (Salto de clave externa inversa)
+
+
+36º Cuente el número de autores que han escrito un libro que contiene la frase 'ab' sin distinguir entre mayúsculas y minúsculas.
+
+   AuthorX.objects.filter(books__title__icontains = 'ab').count()
+
+
+
+37º Consigue todos los autores con seguidores más de 216.
+
+AuthorX.objects.filter(popularity_score__gt = 216).values('firstname')
+
+38º Obtenga la puntuación de popularidad promedio de todos los autores que se unieron después del 20 de septiembre de 2014.
+
+AuthorX.objects.filter(joindate__gt = datetime.date(2014,9,20)).aggregate(promedio = Avg('popularity_score'))['promedio']
+
+
+
+39º Generar una lista de libros cuyo autor ha escrito más de 10 libros.
+
+
+BooksX.objects.filter(''
  __lte -> Less than or equal
  __gte -> Greater than or equal
  __lt -> Less than
