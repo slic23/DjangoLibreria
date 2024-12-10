@@ -15,22 +15,4 @@
     <li><strong>Authors:</strong> {{ num_authors }}</li>
 
   </ul>
-
-  {% if  numlibros%}
-  <ul>
-
-    {% for book in numlibros %}
-    <li>
-      <a href="{{ book.get_absolute_url }} ">{{ book.title }}</a>
-
-      
-
-    </li>
-    {% endfor %}
-
-  </ul>
-  {% else %}
-    <p>No hay libros en la biblioteca.</p>
-  {% endif %}
-
 {% endblock %}

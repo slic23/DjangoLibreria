@@ -34,12 +34,14 @@ def ListarLibros(request):
     context = {
 	'numlibros':numLibros
     }
-    return render(request,'index.html' , context= context)
+    
+    return render(request,'libros.html' , context)
 
 def VistaDetalle(request,pk):
     Libro = Book.objects.filter(pk=pk)[0]
     context = { 'Libro':Libro}
-    return HttpResponse(Libro.author)
+
+    return render(request,'detalle.html',context)
 def index2(request, numero1):
      if numero1 != 0:
         Libro = Book.objects.filter(pk=numero1)[0]
@@ -53,6 +55,7 @@ def index2(request, numero1):
             'autor': dictautor
         }
         return JsonResponse(datos1)
+
      else:
          libros = list(Book.objects.all())
          paquete = []
@@ -73,6 +76,7 @@ def index2(request, numero1):
    
 class BookListView(generic.ListView):
     model = Book
+    paginate_by = 2
     context_object_name = 'book_list'   # your own name for the list as a template variable
     queryset = Book.objects.all() # Get 5 books containing the title war
     template_name = 'book_list.html'  # Specify your own template name/location
@@ -96,8 +100,15 @@ lista = []
     print(lista)
     """
     
+''''''''
+   # return HttpResponse(libros)
+"""
+ def listing(request):
+    contact_list = Books.objects.all()
+    paginator = Paginator(contact_list, 25)  # Show 25 contacts per page.
 
-    libros = BooksX.objects.filter(author__in = autores_escor ).aggregate(total = Sum('price'))['total']
-    AuthorX.objects.filter(Q(firstname__startswith='a')& Q(Q(popularity_score__gte = 5) | Q(joindate__gte = datetime.date(2014,1,1))))
-    
-    return HttpResponse(libros)
+    page_number = request.GET.get("page")
+    page_obj = paginator.get_page(page_number)
+    return render(request, "list.html", {"page_obj": page_obj})
+
+"""
