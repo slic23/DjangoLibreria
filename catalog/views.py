@@ -77,6 +77,7 @@ def index2(request, numero1):
 class BookListView(generic.ListView):
     model = Book
     paginate_by = 2
+    orphans = 0
     context_object_name = 'book_list'   # your own name for the list as a template variable
     queryset = Book.objects.all() # Get 5 books containing the title war
     template_name = 'book_list.html'  # Specify your own template name/location
