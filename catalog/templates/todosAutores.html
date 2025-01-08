@@ -1,0 +1,21 @@
+{% extends "base_generic.html" %}
+
+
+{% block content %}
+{% if  numAutores%}
+<p>Autores disponibles en la biblioteca</p>
+<ul>
+{% for i in numAutores%}
+<li>{{i.first_name}}</li>
+
+{% endfor %}
+</ul>
+{% else %}
+
+    <p>No hay autores en la biblioteca.</p>
+
+
+{% endif %}
+
+
+{% endblock %}

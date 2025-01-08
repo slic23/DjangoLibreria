@@ -119,8 +119,11 @@ lista = []
 
 """
 
+def todosAutores(request):
+    autores = Author.objects.all()
+    contexto = {
+        'numAutores':autores
+    }
+    return render(request,"todosAutores.html",contexto)
 
 
-
-def probandoSession(request):
-    pass

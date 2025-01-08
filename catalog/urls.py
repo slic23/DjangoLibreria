@@ -9,6 +9,7 @@ urlpatterns = [
     path('<int:numero1>/',views.index2,name='index2'),
     path('libros/',views.BookListView.as_view(),name="books"),
     path('mostrar/',views.devolver,name='devolver'),
-    path('consultas/',views.consultas, name="consultas") 
+    path('consultas/',views.consultas, name="consultas"),
+    path('autores/',views.todosAutores,name="autores")
     
 ]
