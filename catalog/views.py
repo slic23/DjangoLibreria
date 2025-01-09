@@ -129,8 +129,10 @@ def todosAutores(request):
 def sumar(request):
     resultado = 0 
     if request.session.get('operacion') == "+":
+        resultado = request.session.get('datos')+request.session.get('siguienteDato')
         
-
+    elif request.session.get('operacion') == "-":
+        pass    
 def calculadora(request):
     #return render(request,'calculadora.html',{})
 
