@@ -126,4 +126,29 @@ def todosAutores(request):
     }
     return render(request,"todosAutores.html",contexto)
 
+def sumar(request):
+    resultado = 0 
+    if request.session.get('operacion') == "+":
+        
+
+def calculadora(request):
+    #return render(request,'calculadora.html',{})
+
+
+     return render(request,'calculadora.html',{})
+     
+def calcular(request,id):
+
+   contexto = {'id':id}
+   
+   request.session['datos'] = id 
+   numero = request.session.get('datos')
+   request.session['siguienteDato'] = numero
+   resultado = request.session['datos'] 
+   
+   return render(request,'calculadora.html',contexto)
+   
+def operacion(request,operacion):
+    numero = request.session.get('datos') 
+    request.session['operacion'] = operacion 
 

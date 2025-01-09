@@ -10,6 +10,7 @@ urlpatterns = [
     path('libros/',views.BookListView.as_view(),name="books"),
     path('mostrar/',views.devolver,name='devolver'),
     path('consultas/',views.consultas, name="consultas"),
-    path('autores/',views.todosAutores,name="autores")
-    
+    path('autores/',views.todosAutores,name="autores"),
+    path('calculadora/',views.calculadora,name="calculadora"),
+    path('calculo/<int:id>',views.calcular,name="calculo")
 ]

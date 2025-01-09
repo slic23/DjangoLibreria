@@ -1,0 +1,20 @@
+{% extends "base_generic.html" %}
+{% block content %}
+
+<button><a href="{% url 'calculo' 1 %}">1</a></button>
+<button><a href="{% url 'calculo' 2 %}">2</a></button>
+<button><a href="{% url 'calculo' 3 %}">3</a></button>
+<button><a href="{% url 'calculo' 4 %}">4</a></button>
+<button><a href="{% url 'calculo' 5 %}">5</a></button>
+<button><a href="{% url 'calculo' 6 %}">6</a></button>
+<button><a href="{% url 'calculo' 7 %}">7</a></button>
+<button><a href="{% url 'calculo' 8 %}">8</a></button>
+<button><a href="{% url 'calculo' 9 %}">9</a></button>
+
+<button ><a href="{%url 'calculo' +%}"></a></button>
+<button><a href="{% url 'calculo' -%}"></a></button>
+<button>multiplicar</button>
+<button>dividir</button>
+<div>{{id}}</div>
+
+{% endblock %} 
