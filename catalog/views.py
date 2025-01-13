@@ -126,31 +126,42 @@ def todosAutores(request):
     }
     return render(request,"todosAutores.html",contexto)
 
-def sumar(request):
-    resultado = 0 
-    if request.session.get('operacion') == "+":
-        resultado = request.session.get('datos')+request.session.get('siguienteDato')
-        
-    elif request.session.get('operacion') == "-":
-        pass    
 def calculadora(request):
     #return render(request,'calculadora.html',{})
 
 
      return render(request,'calculadora.html',{})
      
-def calcular(request,id):
+def calcular(request,numero):
+    primerNumero = request.session.get('primerNumero', 0) 
+    operacion = request.session.get('operacion', '')
+    siguienteNumero = request.session.get('siguienteNumero', 0)  
+    
+    contexto = {'id': 0}  
+    request.session['primerNumero'] = numero
+    request.session['siguienteNumero'] = primerNumero
 
-   contexto = {'id':id}
-   
-   request.session['datos'] = id 
-   numero = request.session.get('datos')
-   request.session['siguienteDato'] = numero
-   resultado = request.session['datos'] 
-   
-   return render(request,'calculadora.html',contexto)
-   
-def operacion(request,operacion):
-    numero = request.session.get('datos') 
-    request.session['operacion'] = operacion 
+    if operacion == 'suma':
+        contexto['id'] = int(request.session['primerNumero']) + int(request.session['siguienteNumero'])
+        return render(request, 'calculadora.html', contexto)
 
+    elif operacion == 'resta': 
+        contexto['id'] = int(request.session['primerNumero']) - int(request.session['siguienteNumero'])
+        return render(request, 'calculadora.html', contexto)
+   
+    elif  operacion == 'multiplicacion':
+        contexto["id"] = int(request.session['primerNumero'])* int(request.session['siguienteNumero'])
+        return render(request,'calculadora.html',contexto)
+    elif operacion == 'divison':
+        contexto['id'] = int(request.session['primerNumero']) / int(request.session['siguienteNumero'])
+        return render(request,'calculadora.html',contexto)
+def operacion(request,operador): 
+    
+    request.session['operacion'] = operador
+
+
+    
+    return render(request,'calculadora.html',{})
+import re 
+def calculoEcuacion(request):
+    pass

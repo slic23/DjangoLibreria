@@ -12,5 +12,6 @@ urlpatterns = [
     path('consultas/',views.consultas, name="consultas"),
     path('autores/',views.todosAutores,name="autores"),
     path('calculadora/',views.calculadora,name="calculadora"),
-    path('calculo/<int:id>',views.calcular,name="calculo")
+    path('calculo/<str:numero>',views.calcular,name="calculo"),
+    path('operacion/<str:operador>', views.operacion,name="operacion") 
 ]

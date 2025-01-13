@@ -11,8 +11,12 @@
 <button><a href="{% url 'calculo' 8 %}">8</a></button>
 <button><a href="{% url 'calculo' 9 %}">9</a></button>
 
-<button ><a href="{%url 'calculo' +%}"></a></button>
-<button><a href="{% url 'calculo' -%}"></a></button>
+<button ><a href="{% url 'operacion' 'suma' %}">+</a></button>
+<button><a href="{% url 'operacion' 'resta' %}">-</a></button>
+<button><a href="{% url 'operacion' 'multiplicacion' %}">*</a></button>
+<button><a href="{% url 'operacion' 'division' %}">/</a></button>
+<button><a href="{%url 'calculo' '('  %}">(</a></button>
+
 <button>multiplicar</button>
 <button>dividir</button>
 <div>{{id}}</div>
