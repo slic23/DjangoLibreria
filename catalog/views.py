@@ -7,6 +7,8 @@ from django.db.models import Sum
 # Create your views here.
 from .models import Book, Author, BookInstance, Genre
 
+
+#@login_required
 def index(request):
     """View function for home page of site."""
 
@@ -165,3 +167,14 @@ def operacion(request,operador):
 import re 
 def calculoEcuacion(request):
     pass
+
+
+
+def usuario(request):
+    pass
+
+
+from django.contrib.auth import logout
+def logout_view(request):
+    logout(request)
+    # Redirect to a success page.
