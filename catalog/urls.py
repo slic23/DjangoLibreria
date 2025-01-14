@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.urls import path
 from . import views
+from django.contrib.auth.views import LogoutView
 
 urlpatterns = [
     path('', views.index, name="index"),
@@ -13,5 +14,6 @@ urlpatterns = [
     path('autores/',views.todosAutores,name="autores"),
     path('calculadora/',views.calculadora,name="calculadora"),
     path('calculo/<str:numero>',views.calcular,name="calculo"),
-    path('operacion/<str:operador>', views.operacion,name="operacion") 
+    path('operacion/<str:operador>', views.operacion,name="operacion") ,
+    path('logout/', LogoutView.as_view(), name='logout')
 ]
