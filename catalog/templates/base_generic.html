@@ -24,7 +24,10 @@
               <li><a href="">All books</a></li>
               <li><a href="{% url 'autores' %}">All authors</a></li>
               <li><a href="/catalog/libritos">Libritos</a></li>
-              <li><a href="{% url 'logout'%}">log out</a></li>
+              <form method="post" action="{% url 'logout' %}">
+                {% csrf_token %}
+                <button type="submit">logout</button>
+              </form>
               <li><a href="{%url 'login'%}">login</a></li>
               <li>{{ user }}</li>
               <li></li>

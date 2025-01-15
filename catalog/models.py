@@ -149,4 +149,12 @@ class UserX(models.Model):
     def __str__(self):
 	    return  self.username
  
-
+class usuarioX(models.Model):
+    
+    
+    
+    
+    
+    
+    
+    

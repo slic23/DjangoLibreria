@@ -169,12 +169,10 @@ def calculoEcuacion(request):
     pass
 
 
+from django.contrib.auth.models import User
+def usuario(request,nombre):
+    user = User.objects.create_user(nombre, 'myemail@crazymail.com', 'mypassword')
+    return HttpResponse(f'El usuario {user.first_name} has isdo creado')
+    
+    
 
-def usuario(request):
-    pass
-
-
-from django.contrib.auth import logout
-def logout_view(request):
-    logout(request)
-    # Redirect to a success page.

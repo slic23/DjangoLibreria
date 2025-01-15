@@ -1,5 +1,8 @@
-<form action="{% url 'logout' %}" method="post">
-  {% csrf_token %}
-  <li>Quieres volver de nuevo a registrate <a href="{% url 'login'%}">login</a></li>
-  <button type="submit">Logout</button>
-</form>
+{% extends "base_generic.html" %}
+
+
+{% block content %}
+<p>¡Sesión finalizada!</p>
+
+<a href="{% url 'login'%}">Haga clic aquí para iniciar sesión nuevamente.</a>
+{% endblock %}
