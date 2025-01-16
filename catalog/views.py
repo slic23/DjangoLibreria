@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from django.http import JsonResponse
 from django.views  import generic
 from catalog.models import *
+from django.contrib.auth.models import User
 from django.db.models import Sum
 # Create your views here.
 from .models import Book, Author, BookInstance, Genre
@@ -127,13 +128,14 @@ def todosAutores(request):
         'numAutores':autores
     }
     return render(request,"todosAutores.html",contexto)
-
+from django.contrib.auth.decorators import permission_required
+@permission_required('calculadoraAcceso')
 def calculadora(request):
     #return render(request,'calculadora.html',{})
 
 
      return render(request,'calculadora.html',{})
-     
+ 
 def calcular(request,numero):
     primerNumero = request.session.get('primerNumero', 0) 
     operacion = request.session.get('operacion', '')
@@ -169,10 +171,12 @@ def calculoEcuacion(request):
     pass
 
 
-from django.contrib.auth.models import User
+
+
+
 def usuario(request,nombre):
-    user = User.objects.create_user(nombre, 'myemail@crazymail.com', 'mypassword')
-    return HttpResponse(f'El usuario {user.first_name} has isdo creado')
-    
+    usarioB = User.objects.create(username = nombre, password = "issam23")
+    userA = usuarioX.objects.create(user = usarioB, username = nombre, email = f"{nombre}@gmail.com")
+    return HttpResponse(f'El usuario {userA.username} ha sido creado')
     
 

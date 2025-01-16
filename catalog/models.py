@@ -4,6 +4,7 @@ from django.utils import timezone
 from django.urls import reverse #Used to generate URLs by reversing the URL patterns
 import uuid # Required for unique book instances
 # Create your models here.
+from django.contrib.auth.models import User
 class Genre(models.Model):
     """
     Modelo que representa un género literario (p. ej. ciencia ficción, poesía, etc.).
@@ -146,14 +147,29 @@ class BooksX(models.Model):
 class UserX(models.Model):
     username = models.CharField(max_length=100)
     email = models.CharField(max_length=100)
+    
+    
     def __str__(self):
 	    return  self.username
  
 class usuarioX(models.Model):
     
+    user =models.OneToOneField(User,on_delete=models.CASCADE)
+    username = models.CharField(max_length=100 ,unique=True)
     
+    email = models.CharField(max_length=100, unique=True )
+
+
+    class Meta:
+        permissions = (("calculadoraAcceso", "Acceso a calculadora"),)
+
+   
     
-    
+    def __str__(self):
+	    return  self.username    
+ 
+ 
+
     
     
     
