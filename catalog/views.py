@@ -128,12 +128,11 @@ def todosAutores(request):
         'numAutores':autores
     }
     return render(request,"todosAutores.html",contexto)
-from django.contrib.auth.decorators import permission_required
-@permission_required('calculadoraAcceso')
+from django.contrib.auth.decorators import permission_required,login_required
+
+@permission_required('catalog.calculadoraAcceso')
 def calculadora(request):
     #return render(request,'calculadora.html',{})
-
-
      return render(request,'calculadora.html',{})
  
 def calcular(request,numero):
@@ -175,7 +174,7 @@ def calculoEcuacion(request):
 
 
 def usuario(request,nombre):
-    usarioB = User.objects.create(username = nombre, password = "issam23")
+    usarioB = User.objects.create_user(username = nombre, password = "issam23")
     userA = usuarioX.objects.create(user = usarioB, username = nombre, email = f"{nombre}@gmail.com")
     return HttpResponse(f'El usuario {userA.username} ha sido creado')
     
