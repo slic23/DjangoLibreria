@@ -8,7 +8,8 @@ from django.db.models import Sum
 # Create your views here.
 from django.shortcuts import get_object_or_404
 from django.http import HttpResponseRedirect
-from django.core.urlresolvers import reverse
+from django.urls import reverse
+
 import datetime
 
 from .forms import RenewBookForm
@@ -209,3 +210,21 @@ def renew_book_librarian(request, pk):
         form = RenewBookForm(initial={'renewal_date': proposed_renewal_date,})
 
     return render(request, 'catalog/book_renew_librarian.html', {'form': form, 'bookinst':book_inst})
+
+from .forms import CrearAutor
+def autor(request):
+    if request.method == "POST":
+        # create a form instance and populate it with data from the request:
+        form = CrearAutor(request.POST)
+        # check whether it's valid:
+        if form.is_valid():
+            # process the data in form.cleaned_data as required
+            # ...
+            # redirect to a new URL:
+            return HttpResponseRedirect("/")
+
+    # if a GET (or any other method) we'll create a blank form
+    else:
+        form = CrearAutor(request.GET)
+
+    return render(request, "crear_autor.html", {"form": form})

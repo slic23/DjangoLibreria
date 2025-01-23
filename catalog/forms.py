@@ -1,7 +1,7 @@
 from django import forms
 
 from django.core.exceptions import ValidationError
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 import datetime #for checking renewal date range.
 
 class RenewBookForm(forms.Form):
@@ -25,4 +25,6 @@ class RenewBookForm(forms.Form):
 class CrearAutor(forms.Form):
     nombre = forms.CharField(max_length=20)
     apellido = forms.CharField(max_length=20)
+    
+    
     
