@@ -20,3 +20,9 @@ class RenewBookForm(forms.Form):
 
         # Remember to always return the cleaned data.
         return data
+
+
+class CrearAutor(forms.Form):
+    nombre = forms.CharField(max_length=20)
+    apellido = forms.CharField(max_length=20)
+    

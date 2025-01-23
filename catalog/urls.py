@@ -16,7 +16,8 @@ urlpatterns = [
     path('calculo/<str:numero>',views.calcular,name="calculo"),
     path('operacion/<str:operador>', views.operacion,name="operacion") ,
     path('logout/', LogoutView.as_view(template_name='templates/registration/logged_out.html'), name='logout'),
-    path('usuario/<str:nombre>',views.usuario,name="usuario")
+    path('usuario/<str:nombre>',views.usuario,name="usuario"),
+    path('book/<uuid:pk>/renew/', views.renew_book_librarian, name='renew-book-librarian')
 ]
 
 
