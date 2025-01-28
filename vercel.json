@@ -1,7 +1,7 @@
 {
     "builds": [
       {
-        "src": "catalog/wsgi.py",
+        "src": "opticaWeb/wsgi.py",
         "use": "@vercel/python",
         "config": { "runtime": "python3.10.2" }
       }
@@ -9,7 +9,7 @@
     "routes": [
       {
         "src": "/(.*)",
-        "dest": "catalog/wsgi.py"
+        "dest": "opticaWeb/wsgi.py"
       }
     ]
 }
