@@ -124,3 +124,17 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_REDIRECT_URL = '/'
+import os
+# Cargar la variable de entorno. El segundo argumento es
+# el valor que ha de tomarse cuando la variable no esté
+# definida.
+stage = os.getenv("MYPROJECT_STAGE", "development")
+if stage == "production":
+    # Producción.
+    from .settings_production import *
+elif stage == "development":
+    # Desarrollo.
+    from .settings_dev import *
+else:
+    # Arrojar un error si MYPROJECT_STAGE tiene un valor desconocido.
+    raise ValueError("Unknown stage: {stage}")
