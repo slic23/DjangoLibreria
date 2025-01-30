@@ -6,7 +6,7 @@
 <p>Autores disponibles en la biblioteca</p>
 <ul>
 {% for i in numAutores%}
-<li>{{i.first_name}}</li>
+<li ><a href="{% url 'author-create' %}">{{i.first_name}}</a></li> 
 
 {% endfor %}
 </ul>

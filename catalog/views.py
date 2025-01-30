@@ -15,6 +15,9 @@ import datetime
 from .forms import RenewBookForm
 from .models import Book, Author, BookInstance, Genre
 
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.urls import reverse_lazy
+from .models import Author
 
 #@login_required
 def index(request):
@@ -228,3 +231,24 @@ def autor(request):
         form = CrearAutor(request.GET)
 
     return render(request, "crear_autor.html", {"form": form})
+
+
+    
+
+
+
+
+class AuthorCreate(CreateView):
+    model = Author
+    fields = '__all__'
+    initial={'date_of_death':'05/01/2018',}
+
+class AuthorUpdate(UpdateView):
+    model = Author
+    fields = ['first_name','last_name','date_of_birth','date_of_death']
+
+class AuthorDelete(DeleteView):
+    model = Author
+    success_url = reverse_lazy('autores')
+
+

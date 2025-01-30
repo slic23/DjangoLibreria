@@ -21,4 +21,10 @@ urlpatterns = [
     path('crearAutor',views.autor, name="crearAutor")
 ]
 
+urlpatterns += [
+    path('create/', views.AuthorCreate.as_view(), name='author-create'),
+    path('autores/<int:pk>/update/', views.AuthorUpdate.as_view(), name='author-update'),
+    path('autores/<int:pk>/delete/', views.AuthorDelete.as_view(), name='author-delete'),
+]
+
 
