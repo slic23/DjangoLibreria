@@ -1,3 +1,4 @@
+
 {% extends "base_generic.html" %}
 
 
@@ -6,8 +7,9 @@
 <p>Autores disponibles en la biblioteca</p>
 <ul>
 {% for i in numAutores%}
-<li ><a href="{% url 'author-create' %}">{{i.first_name}}</a></li> 
-
+<li ><a href="">{{i.first_name}}</a></li> 
+<button><a href="{%url 'author-update'  i.pk %}">Update</a></button>
+<button><a href="{%url 'author-delete' i.pk%}">Delete</a></button>
 {% endfor %}
 </ul>
 {% else %}

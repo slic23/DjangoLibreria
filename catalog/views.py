@@ -1,3 +1,4 @@
+
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.http import JsonResponse
@@ -242,13 +243,12 @@ class AuthorCreate(CreateView):
     model = Author
     fields = '__all__'
     initial={'date_of_death':'05/01/2018',}
+    success_url = reverse_lazy('autores')
 
 class AuthorUpdate(UpdateView):
     model = Author
     fields = ['first_name','last_name','date_of_birth','date_of_death']
-
+    success_url = reverse_lazy('autores')
 class AuthorDelete(DeleteView):
     model = Author
     success_url = reverse_lazy('autores')
-
-

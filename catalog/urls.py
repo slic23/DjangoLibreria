@@ -26,5 +26,3 @@ urlpatterns += [
     path('autores/<int:pk>/update/', views.AuthorUpdate.as_view(), name='author-update'),
     path('autores/<int:pk>/delete/', views.AuthorDelete.as_view(), name='author-delete'),
 ]
-
-
