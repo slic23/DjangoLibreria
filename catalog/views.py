@@ -19,7 +19,7 @@ from .models import Book, Author, BookInstance, Genre
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from .models import Author
-
+from django.contrib import messages
 #@login_required
 def index(request):
     """View function for home page of site."""
@@ -45,6 +45,10 @@ def index(request):
         'num_authors': num_authors,
         'num_visits': num_visits
     }
+    
+    
+    messages.add_message(request, messages.SUCCESS, 'Estas dentro de index')
+    
 
     # Render the HTML template index.html with the data in the context variable
     return render(request, 'index.html', context=context)
@@ -252,3 +256,9 @@ class AuthorUpdate(UpdateView):
 class AuthorDelete(DeleteView):
     model = Author
     success_url = reverse_lazy('autores')
+
+
+
+
+def generarDatos(request):
+    pass

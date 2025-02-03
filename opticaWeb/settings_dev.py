@@ -1,5 +1,5 @@
 DEBUG = True
-ALLOWED_HOSTS = ['127.0.0.1']
+ALLOWED_HOSTS = ['127.0.0.1','localhost']
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
