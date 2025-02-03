@@ -7,7 +7,7 @@
 <p>Autores disponibles en la biblioteca</p>
 <ul>
 {% for i in numAutores%}
-<li ><a href="">{{i.first_name}}</a></li> 
+<li >{{i.first_name}} {{i.last_name}}</li> 
 <button><a href="{%url 'author-update'  i.pk %}">Update</a></button>
 <button><a href="{%url 'author-delete' i.pk%}">Delete</a></button>
 {% endfor %}
