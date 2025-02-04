@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'catalog.apps.CatalogConfig',
     'polls.apps.PollsConfig',
-    'animal.apps.AnimalConfig'
+    #'animal.apps.AnimalConfig'
 ]
 
 MIDDLEWARE = [
@@ -139,3 +139,5 @@ elif stage == "development":
 else:
     # Arrojar un error si MYPROJECT_STAGE tiene un valor desconocido.
     raise ValueError("Unknown stage: {stage}")
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
