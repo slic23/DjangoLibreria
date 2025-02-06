@@ -2,6 +2,22 @@
 
 set -e  # Salir inmediatamente si un comando sale con un estado de error
 
+# Instalación de pip
+echo "Instalando pip..."
+if command -v pip3 &> /dev/null; then
+    echo "pip3 ya está instalado."
+else
+    echo "pip3 no encontrado. Instalando..."
+    if command -v python3 &> /dev/null; then
+        python3 -m ensurepip --upgrade
+    elif command -v python &> /dev/null; then
+        python -m ensurepip --upgrade
+    else
+        echo "Python no encontrado. Instala Python manualmente."
+        exit 1
+    fi
+fi
+
 # Instalación de requerimientos
 echo "Instalando requerimientos..."
 if [ -f requirements.txt ]; then
