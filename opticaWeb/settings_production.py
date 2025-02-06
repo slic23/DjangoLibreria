@@ -4,7 +4,7 @@ DEBUG = False
 DATABASES = {
     'default': {
         "ENGINE": "django.db.backends.postgresql_psycopg2",
-        "HOST": config("POSTGRES_HOST"),
+        "HOST": config("PGHOST"),
         "PORT": 5432,
         "NAME": config("POSTGRES_DATABASE"),
         "USER": config("POSTGRES_USER"),
