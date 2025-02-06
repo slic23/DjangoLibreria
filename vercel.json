@@ -3,7 +3,7 @@
       {
         "src": "opticaWeb/wsgi.py",
         "use": "@vercel/python",
-        "config": { "runtime": "python3.10.2" }
+        "config": { "runtime": "python3.12.2" }
       },{
         "src": "migrate_modelDB.sh",
         "use": "@vercel/static-build",
