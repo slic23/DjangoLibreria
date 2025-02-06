@@ -1,5 +1,5 @@
 echo "Instalando requerimientos..."
-pip3 install -r requirements.txt
+pip  install -r requirements.txt
 
 # Automatic migrations
 echo "Iniciando migraciones..."
