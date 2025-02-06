@@ -8,6 +8,6 @@ DATABASES = {
         "PORT": 5432,
         "NAME": ,
         "USER": "neondb",
-        "PASSWORD": "npg_mjDnbxXiI06z"
+        "PASSWORD": "npg_mjDnbxXiI06z",
     }
 }
