@@ -2,6 +2,7 @@ from django.contrib import admin
 from django.urls import path
 from . import views
 from django.contrib.auth.views import LogoutView
+from .views import TodoListApiView
 
 urlpatterns = [
     path('', views.index, name="index"),
@@ -25,4 +26,5 @@ urlpatterns += [
     path('create/', views.AuthorCreate.as_view(), name='author-create'),
     path('autores/<int:pk>/update/', views.AuthorUpdate.as_view(), name='author-update'),
     path('autores/<int:pk>/delete/', views.AuthorDelete.as_view(), name='author-delete'),
+    path('api', TodoListApiView.as_view()),
 ]

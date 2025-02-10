@@ -11,6 +11,16 @@ from django.shortcuts import get_object_or_404
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
+from rest_framework import permissions
+from .models import *
+from .serializers import TodoSerializer
+
+
+
+
 import datetime
 
 from .forms import RenewBookForm
@@ -262,3 +272,22 @@ class AuthorDelete(DeleteView):
 
 def generarDatos(request):
     pass
+
+
+
+
+class TodoListApiView(APIView):
+    # add permission to check if user is authenticated
+   
+
+    # 1. List all
+    def get(self, request, *args, **kwargs):
+        '''
+        List all the todo items for given requested user
+        '''
+        todos = Book.objects.all()
+        serializer = TodoSerializer(todos, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+    
+        
