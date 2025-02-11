@@ -12,19 +12,6 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 import os
 from pathlib import Path
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
-stage = os.getenv("MYPROJECT_STAGE", "development")
-if stage == "production":
-    # Producción.
-    from .settings_production import *
-elif stage == "development":
-    # Desarrollo.
-    from .settings_dev import *
-else:
-    # Arrojar un error si MYPROJECT_STAGE tiene un valor desconocido.
-    raise ValueError("Unknown stage: {stage}")
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
