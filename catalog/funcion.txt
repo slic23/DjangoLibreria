@@ -1,0 +1,5 @@
+la funcionalidad conciste en controlar el tiempo que pasa el lector en la biblioteca
+
+
+
+

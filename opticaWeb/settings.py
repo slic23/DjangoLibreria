@@ -13,7 +13,7 @@ import os
 from pathlib import Path
 
 # Define BASE_DIR correctly
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = Path(__file__).resolve().parent
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
@@ -37,7 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'catalog.apps.CatalogConfig',
     'polls.apps.PollsConfig',
-    'rest_framework'
+    #'api.apps.ApiConfing',
+    'rest_framework',
+    'animal.apps.AnimalConfig'
 ]
 
 MIDDLEWARE = [

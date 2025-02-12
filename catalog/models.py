@@ -156,9 +156,15 @@ class UserX(models.Model):
 	    return  self.username
  
 class usuarioX(models.Model):
+    """
+    Estos son los usuarios lectores 
+    
+    """
     
     user =models.OneToOneField(User,on_delete=models.CASCADE)
     username = models.CharField(max_length=100 ,unique=True)
+    first_login = models.DateField()
+    last_login = models.DateField()
     
     email = models.CharField(max_length=100, unique=True )
 
