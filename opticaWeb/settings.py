@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'polls.apps.PollsConfig',
     #'api.apps.ApiConfing',
     'rest_framework',
-    'animal.apps.AnimalConfig'
+    #'animal.apps.AnimalConfig'
 ]
 
 MIDDLEWARE = [
