@@ -3,3 +3,18 @@
   padding: 0;
   list-style: none;
 }
+
+
+body {
+  background-image: url('130_alejandria5_2000x1406.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: black;
+  font-size: 25px;
+  font-weight: 599;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
