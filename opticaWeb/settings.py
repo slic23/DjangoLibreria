@@ -13,7 +13,7 @@ import os
 from pathlib import Path
 
 # Define BASE_DIR correctly
-BASE_DIR = Path(__file__).resolve().parent
+BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
@@ -119,7 +119,7 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = 'login'
 
 # Cargar la variable de entorno. El segundo argumento es
 # el valor que ha de tomarse cuando la variable no esté

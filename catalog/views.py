@@ -10,6 +10,7 @@ from django.db.models import Sum
 from django.shortcuts import get_object_or_404
 from django.http import HttpResponseRedirect
 from django.urls import reverse
+from django.shortcuts import get_object_or_404
 
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -71,7 +72,7 @@ def ListarLibros(request):
     return render(request,'libros.html' , context)
 
 def VistaDetalle(request,pk):
-    Libro = Book.objects.filter(pk=pk)[0]
+    Libro = get_object_or_404(Book, pk=pk)
     context = { 'Libro':Libro}
 
     return render(request,'detalle.html',context)
@@ -289,5 +290,5 @@ class TodoListApiView(APIView):
         serializer = TodoSerializer(todos, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
+
     
-        

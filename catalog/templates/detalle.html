@@ -1,16 +1,13 @@
 {% extends "base_generic.html" %}
 
 {% block content %}
-<h1>Detalle del libro <h1>
+<h1 style="color: blue">Detalle del libro <h1>
     {% if  Libro %}
 
     <p>{{Libro.title}}</p>
-     
 
-    
-
-
-    
+    <p>{{Libro.summary}}</p>
+     <img src= alt="">
 
     {% endif %}
     
