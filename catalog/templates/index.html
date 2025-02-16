@@ -22,8 +22,8 @@
       {% endfor %}
   </ul>
 {% endif %}
-
-
+{% load static %}
+<embed src="{% static 'libro.pdf' %}" width="500" height="375" type="application/pdf">
 {% endblock %}
 
 

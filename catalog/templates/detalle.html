@@ -2,13 +2,15 @@
 
 {% block content %}
 <h1 style="color: blue">Detalle del libro <h1>
-    {% if  Libro %}
+    {% if  Libro  %}
 
     <p>{{Libro.title}}</p>
 
+    
     <p>{{Libro.summary}}</p>
-     <img src= alt="">
-
+    {% if Libro.portada %}
+        <img src="{{Libro.portada.url}}">
+    {% endif %} 
     {% endif %}
     
 

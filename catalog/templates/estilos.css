@@ -2,4 +2,9 @@ body {
   background-image:url('130_alejandria5_2000x1406.jpg');
 
 
+
+}
+
+img {
+  opacity: 0.1;
 }

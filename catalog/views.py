@@ -31,6 +31,8 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from .models import Author
 from django.contrib import messages
+import os 
+from fpdf import FPDF
 #@login_required
 def index(request):
     """View function for home page of site."""
@@ -38,6 +40,19 @@ def index(request):
     # Generate counts of some of the main objects
     num_books = Book.objects.all().count()
     num_instances = BookInstance.objects.all().count()
+    #generando pdf con el modelo book de un libro en particular 
+    #primero chequeo de que si existe ese pdf no volver a generarlo 
+    libro = Book.objects.filter(title="Guerra y Paz")[0]
+    if not os.path.exists('catalog/static/libro.pdf'):
+
+        pdf = FPDF()
+        pdf.add_page()
+        pdf.set_font('Arial', 'B', 16)
+        pdf.cell(40, 10, libro.title )
+        pdf.cell(10, 20, libro.summary)
+        pdf.add_page()
+        pdf.image(libro.portada.path, x=90, y=20, w=100)
+        pdf.output('catalog/static/libro.pdf', 'F')
 
     # Available books (status = 'a')
     num_instances_available = BookInstance.objects.filter(status__exact='a').count()
