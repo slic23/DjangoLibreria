@@ -246,6 +246,7 @@ def renew_book_librarian(request, pk):
     return render(request, 'catalog/book_renew_librarian.html', {'form': form, 'bookinst':book_inst})
 
 from .forms import CrearAutor
+from .forms import addLibro
 def autor(request):
     if request.method == "POST":
         # create a form instance and populate it with data from the request:
@@ -263,11 +264,21 @@ def autor(request):
 
     return render(request, "crear_autor.html", {"form": form})
 
+def crearLibro(request):
+    if request.method == "POST":
+        form = addLibro(request.POST)
+        if form.is_valid():
+            titulo = form.cleaned_data['title']
+            lenguaje = form.cleaned_data['lenguaje']
+            autor = form.cleaned_data['author']
+            isb = form.cleaned_data['isbn']
+            
+        
+            return HttpResponseRedirect("/")
 
-    
-
-
-
+    else:
+        form= addLibro(request.GET)
+    return render(request,'addlibro.html',{"form":form})
 
 class AuthorCreate(CreateView):
     model = Author

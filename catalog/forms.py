@@ -1,4 +1,6 @@
 from django import forms
+from django.forms import ModelForm
+from .models import *
 
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
@@ -27,4 +29,7 @@ class CrearAutor(forms.Form):
     apellido = forms.CharField(max_length=20)
     
     
-    
+class addLibro(ModelForm):
+    class Meta:
+        model = Book
+        fields = '__all__'
