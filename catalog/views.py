@@ -234,9 +234,9 @@ def renew_book_librarian(request, pk):
             # process the data in form.cleaned_data as required (here we just write it to the model due_back field)
             book_inst.due_back = form.cleaned_data['renewal_date']
             book_inst.save()
-
+            messages.add_message(request, messages.SUCCESS, 'El libro ha sido añadido')
             # redirect to a new URL:
-            return HttpResponseRedirect(reverse('/') )
+            return HttpResponseRedirect('')
 
     # If this is a GET (or any other method) create the default form.
     else:
@@ -271,10 +271,17 @@ def crearLibro(request):
             titulo = form.cleaned_data['title']
             lenguaje = form.cleaned_data['lenguaje']
             autor = form.cleaned_data['author']
+            sinopsis = form.cleaned_data['summary']
             isb = form.cleaned_data['isbn']
+            portada = form.cleaned_data['portada']
+            genero = form.cleaned_data['genre']
             
-        
-            return HttpResponseRedirect("/")
+            libro = Book(title=titulo, lenguaje= lenguaje,author= autor,summary = sinopsis,isbn = isb  )
+            libro.save()
+            libro.genre.set([genero][0])
+            messages.add_message(request, messages.SUCCESS, 'El libro ha sido añadido ')
+
+            return render(request,'index.html',{})
 
     else:
         form= addLibro(request.GET)
@@ -317,4 +324,11 @@ class TodoListApiView(APIView):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 
+
+class addLibro(CreateView):
+ 
+    model = Book
+    success_url= reverse_lazy('books')
     
+    fields = ('__all__')
+

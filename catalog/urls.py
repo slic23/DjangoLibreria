@@ -20,7 +20,8 @@ urlpatterns = [
     path('usuario/<str:nombre>',views.usuario,name="usuario"),
     path('book/<uuid:pk>/renew/', views.renew_book_librarian, name='renew-book-librarian'),
     path('crearAutor',views.autor, name="crearAutor"),
-    path('crearlibro/',views.crearLibro , name="crearlibro")
+    path('crearlibro/',views.crearLibro , name="crearlibro"),
+    path('addbook/',views.addLibro.as_view(), name="addbook")
 ]
 
 urlpatterns += [
