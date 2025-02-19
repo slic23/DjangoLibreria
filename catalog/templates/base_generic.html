@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     {% block title %}
@@ -12,7 +12,7 @@
       crossorigin="anonymous">
     <!-- Add additional CSS in static file -->
     {% load static %}
-    <link rel="stylesheet" href="{% static  'css/styles.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
   </head>
   <body>
     <div class="container-fluid">
@@ -21,22 +21,24 @@
           {% block sidebar %}
             <ul class="sidebar-nav">
               <li><a href="{% url 'index' %}">Home</a></li>
-              <li><a href="{% url 'books'%}">All books</a></li>
+              <li><a href="{% url 'books' %}">All books</a></li>
               <li><a href="{% url 'autores' %}">All authors</a></li>
               <li><a href="/catalog/libritos">Libritos</a></li>
               <form method="post" action="{% url 'logout' %}">
                 {% csrf_token %}
                 <button type="submit">logout</button>
               </form>
-              <li><a href="{%url 'login'%}">login</a></li>
-              <li><a href="{% url 'calculadora'%}">calculadora express</a></li>
+              <li><a href="{% url 'login' %}">login</a></li>
+              <li><a href="{% url 'calculadora' %}">calculadora express</a></li>
               <li>{{ user }}</li>
-              <li><button><a href="{% url 'crearAutor'%}">Crear autor</a></button></li>
-              <li><button><a href="{% url 'author-create'%}">Crear Usuario</a></button></li>
+              <li><button><a href="{% url 'crearAutor' %}">Crear autor</a></button></li>
+              <li><button><a href="{% url 'author-create' %}">Crear Usuario</a></button></li>
             </ul>
           {% endblock %}
         </div>
-        <div class="col-sm-10 ">{% block content %}{% endblock %}</div>
+        <div class="col-sm-10">
+          {% block content %}{% endblock %}
+        </div>
       </div>
     </div>
   </body>

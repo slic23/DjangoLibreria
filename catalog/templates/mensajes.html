@@ -1,0 +1,29 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mensajes</title>
+</head>
+<body>
+    <h1>Mensajes</h1>
+    <p>Aquí puedes ver todos los mensajes.</p>
+ <h4>{{usuario.solicitante.username}}</h4>
+ <h5>mensajes</h5>
+ {% if mensajes %}
+ <ul>
+   {% for mensaje in mensajes %}
+   <li>
+     <a>{{ mensaje.contenido}}</a>
+
+   </li>
+   {% endfor %}
+ {% endif %}
+</body>
+</html>
+{% endblock %}
+
+

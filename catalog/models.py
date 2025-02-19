@@ -4,6 +4,7 @@ from django.utils import timezone
 from django.urls import reverse #Used to generate URLs by reversing the URL patterns
 import uuid # Required for unique book instances
 # Create your models here.
+import datetime
 from django.contrib.auth.models import User
 class Genre(models.Model):
     """
@@ -161,23 +162,72 @@ class usuarioX(models.Model):
     
     """
     
-    user =models.OneToOneField(User,on_delete=models.CASCADE)
-    username = models.CharField(max_length=100 ,unique=True)
-    
-    email = models.CharField(max_length=100, unique=True )
-
-
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    username = models.CharField(max_length=100, unique=True)
+    email = models.CharField(max_length=100, unique=True)
+    amigos = models.ManyToManyField('self', through='solicitud', symmetrical=False, related_name='amigos_relacionados')
+    votosEjemplares = models.ManyToManyField(BookInstance,through='votos')
     class Meta:
         permissions = (("calculadoraAcceso", "Acceso a calculadora"),)
 
-   
+    def __str__(self):
+        return self.username    
+ 
+ 
+#cada comentario estarea hecho por un lector, usare esto para listar los comentarios debajo del libro, pulsando en cada lectura del comentario cambiara de color porque se ha leido 
+#
+class comentario(models.Model):
+    contenido = models.CharField(max_length=500,blank=True,null=False)
+    nombre = models.CharField(max_length=600,blank=True,null=False)
+    idAutor = models.ForeignKey('usuarioX',on_delete=models.CASCADE)
+    libro = models.ForeignKey(BookInstance,on_delete=models.CASCADE)
+    fecha_hora = models.DateTimeField(auto_now_add=True)
+
+
+class mensaje(models.Model):
+     #aqui tenia que definir dos related names diferentes sino django me daba por defecto dos iguales related names, petaba el programa
+
+     contenido = models.CharField(max_length=500,blank=False,null=False)
+     remitente = models.ForeignKey(usuarioX,blank=True,null=False , on_delete=models.CASCADE ,related_name ="mensajeEnviado")
+     destinatario = models.ForeignKey(usuarioX,blank=True,null=False, on_delete=models.CASCADE , related_name="mensajerecibido")
+
+          
+    
+class solicitud(models.Model):
+    ESTADO_CHOICES = (
+        ('pendiente', 'Pendiente'),
+        ('aceptada', 'Aceptada'),
+        ('rechazada', 'Rechazada'),
+    )
+    
+    estado = models.CharField(max_length=10, choices=ESTADO_CHOICES, default='pendiente')
+    solicitante = models.ForeignKey('usuarioX', related_name='solicitudes_enviadas', on_delete=models.CASCADE)
+    destinatario = models.ForeignKey('usuarioX', related_name='solicitudes_recibidas', on_delete=models.CASCADE)
+    fecha_solicitud = models.DateTimeField(auto_now_add=True)
     
     def __str__(self):
-	    return  self.username    
- 
- 
+        return self.destinatario.username
+        
 
-    
-    
-    
-    
+
+class Ejemplares_lectores(models.Model):
+     estados_lectura = (('leido','leido'),('leyendo','leyendo'),('pendiente','pendiente'))
+     estado = models.CharField(max_length=10,choices=estados_lectura,default="pendiete")
+     lector = models.ForeignKey(usuarioX,on_delete=models.CASCADE)
+     ejemplar = models.ForeignKey(BookInstance,on_delete=models.CASCADE)
+     comentario = models.ForeignKey(comentario,on_delete=models.CASCADE)
+     def __str__(self):
+          return self.estado
+     
+
+
+class votos(models.Model):
+     ejemplar = models.ForeignKey(BookInstance,on_delete= models.CASCADE)
+     lector = models.ForeignKey(usuarioX,on_delete= models.CASCADE)
+     class meta:
+          #un lector solo puede votar a un ejemplar
+          unique_together = ['ejemplar','lector']
+
+
+
+

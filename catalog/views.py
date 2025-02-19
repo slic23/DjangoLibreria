@@ -1,4 +1,3 @@
-
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.http import JsonResponse
@@ -176,42 +175,36 @@ def calculadora(request):
     #return render(request,'calculadora.html',{})
      return render(request,'calculadora.html',{})
  
-def calcular(request,numero):
-    primerNumero = request.session.get('primerNumero', 0) 
+def calcular(request, numero):
+    primerNumero = request.session.get('primerNumero', 0)
     operacion = request.session.get('operacion', '')
-    siguienteNumero = request.session.get('siguienteNumero', 0)  
-    
-    contexto = {'id': 0}  
+    siguienteNumero = request.session.get('siguienteNumero', 0)
+
+    contexto = {'id': 0}
     request.session['primerNumero'] = numero
     request.session['siguienteNumero'] = primerNumero
 
     if operacion == 'suma':
         contexto['id'] = int(request.session['primerNumero']) + int(request.session['siguienteNumero'])
         return render(request, 'calculadora.html', contexto)
-
-    elif operacion == 'resta': 
+    elif operacion == 'resta':
         contexto['id'] = int(request.session['primerNumero']) - int(request.session['siguienteNumero'])
         return render(request, 'calculadora.html', contexto)
-   
-    elif  operacion == 'multiplicacion':
-        contexto["id"] = int(request.session['primerNumero'])* int(request.session['siguienteNumero'])
-        return render(request,'calculadora.html',contexto)
-    elif operacion == 'divison':
+    elif operacion == 'multiplicacion':
+        contexto['id'] = int(request.session['primerNumero']) * int(request.session['siguienteNumero'])
+        return render(request, 'calculadora.html', contexto)
+    elif operacion == 'division':
         contexto['id'] = int(request.session['primerNumero']) / int(request.session['siguienteNumero'])
-        return render(request,'calculadora.html',contexto)
-def operacion(request,operador): 
-    
+        return render(request, 'calculadora.html', contexto)
+
+    return render(request, 'calculadora.html', contexto)
+
+def operacion(request, operador):
     request.session['operacion'] = operador
-
-
-    
-    return render(request,'calculadora.html',{})
+    return render(request, 'calculadora.html', {})
 import re 
 def calculoEcuacion(request):
     pass
-
-
-
 
 
 def usuario(request,nombre):
@@ -332,3 +325,30 @@ class addLibro(CreateView):
     
     fields = ('__all__')
 
+
+
+@login_required
+def accesoLector(request):
+    usuario_actual = request.user
+ 
+    usuarioF = usuarioX.objects.filter(username = request.user)[0]
+    lista = solicitud.objects.filter(solicitante = usuarioF.pk)
+
+    
+    
+    return render(request, 'lector.html', {'lector': usuarioF,"lista":lista})
+
+
+def mensajes(request,pk):
+    usarioF = solicitud.objects.filter(pk=pk)[0]
+    remitente = usarioF.solicitante.username
+    recibe = usarioF.destinatario.username
+    mensajes = mensaje.objects.filter(remitente__username= remitente)
+    contexto = {
+        "remitente":remitente,
+        "recibe":recibe,
+        "mensajes":mensajes,
+        "usuario":usarioF
+    }
+    
+    return render(request,'mensajes.html', contexto)

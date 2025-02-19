@@ -6,7 +6,8 @@
 
 
 body {
-  background-image: url('130_alejandria5_2000x1406.jpg');
+  /* background-image: url('130_alejandria5_2000x1406.jpg'); */
+  background-color: #ffffff; /* Puedes establecer un color de fondo en su lugar */
   background-repeat: no-repeat;
   background-size: cover;
   color: black;
@@ -15,6 +16,5 @@ body {
 }
 
 a {
-  text-decoration: none;
-  color: black;
+  
 }

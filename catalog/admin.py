@@ -18,6 +18,7 @@ admin.site.register(BooksX)
 admin.site.register(UserX)
 admin.site.register(PublisherX)
 from .models import usuarioX
+from .models import *
 class AuthorAdmin(admin.ModelAdmin):
     list_display = ('last_name', 'first_name', 'date_of_birth', 'date_of_death')
 
@@ -27,3 +28,10 @@ admin.site.register(Author, AuthorAdmin)
 
 admin.site.register(Permission)
 admin.site.register(usuarioX)
+
+
+admin.site.register(mensaje)
+admin.site.register(votos)
+admin.site.register(solicitud)
+admin.site.register(Ejemplares_lectores)
+admin.site.register(comentario)

@@ -1,0 +1,18 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+    <h1>Perfil del Lector</h1>
+    <h1>Nombre de usuario:{{lector.username}}</h1>
+    <h2>Lista de amigos</h1>
+    
+        {% if lista %}
+        <ul>
+          {% for amigo in lista  %}
+          <li>
+            <a href="{% url 'mensaje' amigo.pk %}">{{ amigo }}</a>
+
+          </li>
+          {% endfor %}
+        {% endif %}
+    <a href="">Amigos</a> <!--Esto sera una lista de amigos que llevara a otra template con la lista de amigos-->
+{% endblock %}

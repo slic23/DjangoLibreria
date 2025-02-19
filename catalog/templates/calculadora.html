@@ -1,24 +1,24 @@
 {% extends "base_generic.html" %}
 {% block content %}
 
-<button><a href="{% url 'calculo' 1 %}">1</a></button>
-<button><a href="{% url 'calculo' 2 %}">2</a></button>
-<button><a href="{% url 'calculo' 3 %}">3</a></button>
-<button><a href="{% url 'calculo' 4 %}">4</a></button>
-<button><a href="{% url 'calculo' 5 %}">5</a></button>
-<button><a href="{% url 'calculo' 6 %}">6</a></button>
-<button><a href="{% url 'calculo' 7 %}">7</a></button>
-<button><a href="{% url 'calculo' 8 %}">8</a></button>
-<button><a href="{% url 'calculo' 9 %}">9</a></button>
+<a href="{% url 'calculo' 1 %}"><button>1</button></a>
+<a href="{% url 'calculo' 2 %}"><button>2</button></a>
+<a href="{% url 'calculo' 3 %}"><button>3</button></a>
+<a href="{% url 'calculo' 4 %}"><button>4</button></a>
+<a href="{% url 'calculo' 5 %}"><button>5</button></a>
+<a href="{% url 'calculo' 6 %}"><button>6</button></a>
+<a href="{% url 'calculo' 7 %}"><button>7</button></a>
+<a href="{% url 'calculo' 8 %}"><button>8</button></a>
+<a href="{% url 'calculo' 9 %}"><button>9</button></a>
+<a href="{% url 'operacion' 'CE' %}"><button>CE</button></a>
 
-<button ><a href="{% url 'operacion' 'suma' %}">+</a></button>
-<button><a href="{% url 'operacion' 'resta' %}">-</a></button>
-<button><a href="{% url 'operacion' 'multiplicacion' %}">*</a></button>
-<button><a href="{% url 'operacion' 'division' %}">/</a></button>
-<button><a href="{%url 'calculo' '('  %}">(</a></bu                                                                                                                tton>
+<a href="{% url 'operacion' 'suma' %}"><button>+</button></a>
+<a href="{% url 'operacion' 'resta' %}"><button>-</button></a>
+<a href="{% url 'operacion' 'multiplicacion' %}"><button>*</button></a>
+<a href="{% url 'operacion' 'division' %}"><button>/</button></a>
+<a href="{% url 'calculo' 'I' %}"><button>(</button></a>
+<a href="{% url 'calculo' 'D' %}"><button>)</button></a>      
 
-<button>multiplicar</button>
-<button>dividir</button>
-<div>{{id}}</div>
+<div>{{ id }}</div>
 
-{% endblock %} 
+{% endblock %}
